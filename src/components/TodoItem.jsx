@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
-import { Check, Trash2 } from 'lucide-react'
-import { PRI } from '../constants'
+import { Calendar, Check, Trash2 } from 'lucide-react'
+import { CATEGORIES, PRI, dueStatus, formatDate } from '../constants'
 
 export default function TodoItem({ todo, onToggle, onDelete, onSave, onCyclePriority }) {
   const [editing, setEditing] = useState(false)
   const [value, setValue] = useState(todo.text)
   const inputRef = useRef(null)
+  const due = dueStatus(todo)
+  const cat = CATEGORIES[todo.cat]
 
   useEffect(() => {
     if (editing) inputRef.current?.focus()
@@ -64,6 +66,20 @@ export default function TodoItem({ todo, onToggle, onDelete, onSave, onCyclePrio
             {todo.text}
           </span>
         )}
+        <div className="flex flex-wrap items-center gap-2 mt-1.5 text-xs">
+          <span className="flex items-center gap-1" style={{ color: cat.color }}>
+            <span className="w-2 h-2 rounded-full" style={{ background: cat.color }} />
+            {cat.label}
+          </span>
+          {todo.due && (
+            <span className={'flex items-center gap-1 px-2 py-0.5 rounded-full font-medium due-' + (due || 'upcoming')}>
+              <Calendar size={11} />
+              {due === 'overdue' && 'เลยกำหนด · '}
+              {due === 'today' && 'วันนี้ · '}
+              {formatDate(todo.due)}
+            </span>
+          )}
+        </div>
       </div>
 
       <button

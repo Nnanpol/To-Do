@@ -30,3 +30,11 @@ body { background: var(--bg); color: var(--fg); font-family: 'Noto Sans Thai', s
 
 .tab { padding: 6px 14px; border-radius: 8px; font-size: 14px; color: var(--mute); font-weight: 500; }
 .tab.on { background: var(--acc); color: #fff; }
+
+.due-overdue { background: #fee2e2; color: #991b1b; }
+.due-today { background: #fef3c7; color: #92400e; }
+.due-upcoming { background: var(--line); color: var(--mute); }
+.cat-btn { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 12px; border-radius: 10px; font-size: 14px; font-weight: 500; white-space: nowrap; color: var(--fg); }
+.cat-btn:hover { background: var(--line); }
+.cat-btn.on { background: var(--acc); color: #fff; }
+.cat-count { font-size: 12px; opacity: .75; }
